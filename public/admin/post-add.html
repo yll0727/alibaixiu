@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="utf-8">
   <title>Add new post &laquo; Admin</title>
   <link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="../assets/vendors/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="../assets/css/admin.css">
+  <link rel="stylesheet" href="../assets/vendors/nprogress/nprogress.css">
+  <script src="../assets/vendors/nprogress/nprogress.js"></script>
 </head>
-<body>
 
+<body>
+  <script>
+    NProgress.start();
+  </script>
   <div class="main">
     <nav class="navbar">
       <button class="btn btn-default navbar-btn fa fa-bars"></button>
@@ -33,7 +39,8 @@
           </div>
           <div class="form-group">
             <label for="content">内容</label>
-            <textarea name="content" id="content" class="form-control input-lg" cols="30" rows="10" placeholder="内容"></textarea>
+            <textarea name="content" id="content" class="form-control input-lg" cols="30" rows="10"
+              placeholder="内容"></textarea>
           </div>
         </div>
         <div class="col-md-3">
@@ -42,12 +49,14 @@
             <!-- show when image chose -->
             <img class="help-block thumbnail" style="display: none">
             <input id="feature" class="form-control" type="file">
+            <!-- 实现文章封面图片上传，并将上传后的图片地址保存在一个隐藏域中 -->
+            <input type="hidden" name="thumbnail" id="thumbnail" value={{$value._id}}>
           </div>
           <div class="form-group">
             <label for="category">所属分类</label>
             <select name="category" id="category" class="form-control">
-              <option value="1">未分类</option>
-              <option value="2">潮生活</option>
+              <!-- <option value="1">未分类</option>
+              <option value="2">潮生活</option> -->
             </select>
           </div>
           <div class="form-group">
@@ -108,5 +117,17 @@
 
   <script src="../assets/vendors/jquery/jquery.js"></script>
   <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
+  <script src="../assets/vendors/art-template/template-web.js"></script>
+  <!-- 文章 所属分类 下拉列表 -->
+  <script type="text/html" id="categoryTpl">
+    {{each data}}
+    <option value="{{$value._id}}">{{$value.title}}</option>
+    {{/each}}
+  </script>
+  <script src="../assets/js/post-add.js"></script>
+  <script>
+    NProgress.done()
+  </script>
 </body>
+
 </html>
